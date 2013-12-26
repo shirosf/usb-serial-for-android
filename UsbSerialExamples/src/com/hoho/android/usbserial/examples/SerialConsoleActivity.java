@@ -176,4 +176,61 @@ public class SerialConsoleActivity extends Activity {
         context.startActivity(intent);
     }
 
+    private final byte STX=0x02;
+    private final byte ETX=0x03;
+    private final byte ACK=0x06;
+    private final static char[] HEX_DIGITS = {
+            '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'
+    };
+    private Boolean wait_ack = false;
+
+    private int send_data(byte[] data)
+    {
+	int parity=0;
+	byte[] sdata;
+	if(!mSerialIoManager) return -1;
+
+	sdata=new byte[data.length+4];
+	sdata[0]=STX;
+	for(int i=0;i<data.length;i++){
+	    sdata[i+1]=data[i];
+	    parity^=data[i];
+	}
+	sdata[data.length+1]=ETX;
+	sdata[data.length+2]=HEX_DIGITS((parity>>4)&0x0F);
+	sdata[data.length+3]=HEX_DIGITS(parity&0x0F);
+	mSerialIoManager.writeAsync(sdata);
+	wait_ack=true;
+	return 0;
+    }
+
+    private byte[] check_rec_data(byte[] data)
+    {
+	byte[] res;
+	int parity=0;
+	int len=0;
+	if(data.length<4) return null;
+	if(data[0]!=STX) return null;
+	for(byte d : data){
+	    if(d==ETX) break;
+	    parity ^= d;
+	    len++;
+	}
+	if(len>data.length-3) return null;
+	int rb=Integer.parseInt(new String(data, len+1,2),16);
+	if(rb!=parity) return null;
+	return Arrays.copyOfRange(data,1,len);
+    }
+
+    
+
+    /** Called when the user clicks the Read button */
+    public void readData(View view) {
+        if (mSerialIoManager != null) {
+	    mDumpTextView.append("Read one data\n");
+	}else{
+	    mDumpTextView.append("Not Connected\n");
+	}
+        mScrollView.smoothScrollTo(0, mDumpTextView.getBottom());
+    }
 }
