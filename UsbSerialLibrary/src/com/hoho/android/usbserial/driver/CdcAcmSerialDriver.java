@@ -242,6 +242,10 @@ public class CdcAcmSerialDriver extends CommonUsbSerialDriver {
                 new int[] {
                     UsbId.LEAFLABS_MAPLE,
                 });
+        supportedDevices.put(Integer.valueOf(UsbId.VENDOR_TECHNOAP),
+                new int[] {
+                    UsbId.TECHNOAP_TC200S,
+                });
         return supportedDevices;
     }
 
