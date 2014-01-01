@@ -245,6 +245,15 @@ public class CdcAcmSerialDriver extends CommonUsbSerialDriver {
         supportedDevices.put(Integer.valueOf(UsbId.VENDOR_TECHNOAP),
                 new int[] {
                     UsbId.TECHNOAP_TC200S,
+		    UsbId.TECHNOAP_TC100S,
+		    UsbId.TECHNOAP_UKP01,
+		    UsbId.TECHNOAP_UKP02,
+		    UsbId.TECHNOAP_UKP03,
+		    UsbId.TECHNOAP_UKP04,
+		    UsbId.TECHNOAP_UKP05,
+		    UsbId.TECHNOAP_UKP07,
+		    UsbId.TECHNOAP_UKP08,
+		    UsbId.TECHNOAP_UKP09,
                 });
         return supportedDevices;
     }

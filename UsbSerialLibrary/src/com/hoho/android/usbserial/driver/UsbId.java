@@ -61,6 +61,15 @@ public final class UsbId {
 
     public static final int VENDOR_TECHNOAP = 0x1CA6;
     public static final int TECHNOAP_TC200S = 0x0106;
+    public static final int TECHNOAP_TC100S = 0x0100;
+    public static final int TECHNOAP_UKP01 = 0x0101;
+    public static final int TECHNOAP_UKP02 = 0x0102;
+    public static final int TECHNOAP_UKP03 = 0x0103;
+    public static final int TECHNOAP_UKP04 = 0x0104;
+    public static final int TECHNOAP_UKP05 = 0x0105;
+    public static final int TECHNOAP_UKP07 = 0x0107;
+    public static final int TECHNOAP_UKP08 = 0x0108;
+    public static final int TECHNOAP_UKP09 = 0x0109;
 
     private UsbId() {
         throw new IllegalAccessError("Non-instantiable class.");
